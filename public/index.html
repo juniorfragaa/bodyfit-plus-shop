@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BodyFit Plus - Home</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header: logo + main navigation, repeated identically on every page for consistency -->
+    <header>
+        <!-- Logo image is paired with a visually-hidden h1 (see .sr-only in CSS), so screen
+             readers still announce the brand name even though only the logo is shown -->
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo.png" alt="BodyFit Plus logo">
+                <h1 class="sr-only">BodyFit Plus</h1>
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <!-- aria-current="page" tells assistive tech which page is currently open;
+                     it moves to a different link on each page -->
+                <li><a href="index.html" aria-current="page">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="plans.html">Plans</a></li>
+                <li><a href="equipment.html">Equipment</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+    <!-- Hero section: the first thing visitors see - headline, photos, and a call-to-action
+         button pointing straight to the Plans page -->
+    <section class="hero">
+        <h2>Train Smart! Eat Right! See Results!</h2>
+        <p> At BodyFit Plus, every membership includes real nutritionist and personal trainer support, it's not just gym access </p>
+        <div class="hero-images">
+        <img src="images/hero.jpg" alt="Personal trainer guiding a client during a workout" class="hero-img">
+        <img src="images/hero2.jpg" alt="Nutritionist reviewing a meal plan with a client" class="hero-img">
+        <img src="images/hero3.jpg" alt="Interior view of the BodyFit Plus gym" class="hero-img">
+        </div>
+        <a href="plans.html" class="cta-button">View our Plans</a>
+    </section>
+ <!-- Features section: highlights the 3 key differentiators of the gym -->
+ <section class="features">
+    <h2>Why BodyFit Plus ?</h2>
+    <div class="feature-list">
+        <div class="feature">
+            <h3>🥗 Nutrition</h3>
+            <p>Personalized diet plans from a certified nutritionist, updated monthly.</p>
+        </div>
+        <div class="feature">
+            <h3>🏋️ Personal Training</h3>
+            <p>One-on-one guidance to keep your workouts safe and effective.</p>
+        </div>
+        <div class="feature">
+            <h3>💻 Online Portal</h3>
+            <p>Access your workout and diet plans anytime, anywhere.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Highlights section: testimonials and the demo video shown as two side-by-side columns
+     (each column is stretched to the same height using CSS flexbox, see .highlights in styles.css) -->
+<section class="highlights">
+    <div class="testimonials">
+        <h2>What Our Members Say</h2>
+        <div class="testimonial-list">
+            <div class="testimonial">
+                <p>"BodyFit Plus completely changed how I train. Having a nutritionist and personal trainer in one place made all the difference."</p>
+                <span>- César Fraga</span>
+            </div>
+            <div class="testimonial">
+                <p>"The online portal makes it so easy to follow my workout and diet plan every day."</p>
+                <span>- Elenice Fraga</span>
+            </div>
+            <div class="testimonial">
+                <p>"Best decision I've made for my health. The team here actually cares about your results."</p>
+                <span>- João Miguel</span>
+            </div>
+        </div>
+    </div>
+    <!-- Embedded YouTube video via iframe - adds a second type of media besides photos.
+         An <iframe> embeds another web page (here, YouTube's video player) inside this one:
+           - width/height: starting size in pixels (CSS later makes it stretch/resize)
+           - src: the special "embed" link YouTube generates for a video (different
+             from the normal watch link) - this is what actually loads the player
+           - title: a short description read by screen readers, since the iframe's
+             content itself isn't part of this page's HTML
+           - allowfullscreen: lets the visitor expand the video to fullscreen -->
+    <div class="video">
+        <h2>See How It Works</h2>
+        <iframe width="640" height="360"
+            src="https://www.youtube.com/embed/CLHuC7IBVes?si=PlyBCm4Pg4WCwOnY"
+            title="YouTube video player"
+            frameborder="0"
+            allowfullscreen>
+        </iframe>
+    </div>
+</section>
+</main>
+<!-- Footer: repeated identically on every page - brand blurb, quick links, and contact info -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-column">
+            <h3>BodyFit Plus</h3>
+            <p>Your all-in-one gym, nutrition, and personal training experience.</p>
+        </div>
+        <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="plans.html">Plans</a></li>
+                <li><a href="equipment.html">Equipment</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Contact</h3>
+            <p>123 Fitness Street, Dublin</p>
+            <p>Phone: (01) 234 5678</p>
+        </div>
+    </div>
+    <p class="footer-bottom">&copy; 2026 BodyFit Plus. All rights reserved.</p>
+</footer>
+</body>
+</html>

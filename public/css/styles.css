@@ -1,0 +1,378 @@
+/* Reset: removes default browser spacing so every page starts from the same baseline */
+* {
+    margin: 0;    /* margin = invisible space OUTSIDE an element's border, pushing other elements away */
+    padding: 0;   /* padding = invisible space INSIDE an element, between its border and its own content */
+    box-sizing: border-box; /* padding/border no longer add to the element's set width */
+}
+
+/* Base styles + sticky footer: body stretches to fill the screen, main grows to
+   push the footer to the bottom even on short pages */
+body {
+    font-family: Arial, sans-serif; /* font-family = which font the text uses; the 2nd name is a fallback */
+    color: #222;                    /* color = the TEXT color (almost black here, not pure #000) */
+    line-height: 1.5;                /* line-height = the height of each line of text, 1.5x the font size */
+    background-color: var(--light-color);
+    min-height: 100vh;          /* vh = % of the screen's visible height; 100vh = at least the full screen */
+    display: flex;              /* flex = lay out this element's direct children in a single row or column */
+    flex-direction: column;     /* column = stack header/main/footer top to bottom instead of side by side */
+}
+
+main {
+    flex: 1; /* flex:1 = grow and fill any leftover vertical space, which pushes the footer to the bottom */
+}
+
+/* Brand colors stored as variables, so they only need to change in one place */
+:root {
+    --primary-color: #ED1B2F;
+    --dark-color: #1a1a1a;
+    --light-color: #f4f4f4;
+}
+
+/* Header: dark bar, logo on one side and nav on the other */
+header {
+    background-color: var(--dark-color);
+    color: white;
+    padding: 1rem 2rem;              /* two values = top/bottom then left/right (1rem = 16px, 2rem = 32px) */
+    display: flex;
+    justify-content: space-between;  /* space-between = push the first child left and the last child right */
+    align-items: center;             /* align-items = line children up on the cross axis (here, vertically) */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* gap = fixed space BETWEEN flex children, without needing separate margins */
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none; /* removes the underline a browser normally puts on links */
+    color: inherit;        /* inherit = use the parent's text color instead of the default link blue */
+}
+
+.logo img {
+    height: 40px;
+    width: auto; /* auto = scale the width automatically so the logo keeps its real proportions */
+}
+
+/* Hides an element visually while screen readers can still read it */
+.sr-only {
+    position: absolute;       /* takes it out of the normal page flow, so it can't push other content */
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;              /* pulls the 1px box back in so it doesn't nudge nearby layout at all */
+    overflow: hidden;          /* hides any part of the content that doesn't fit inside that 1x1px box */
+    clip: rect(0, 0, 0, 0);    /* an older, extra-safe way to clip an element down to nothing visible */
+    white-space: nowrap;       /* stops the text from wrapping onto a 2nd line and becoming tall enough to show */
+    border: 0;
+}
+
+/* Nav menu: horizontal row instead of a bulleted list */
+nav ul {
+    list-style: none;  /* removes the default bullet point in front of each <li> */
+    display: flex;
+    gap: 1.5rem;        /* 1.5rem (24px) of space between each nav link */
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: var(--primary-color); /* :hover = applies only while the mouse is actually over the link */
+}
+
+/* Hero section (Home page banner) */
+.hero {
+    text-align: center; /* text-align = horizontal alignment of inline content (text, inline-block links...) */
+    padding: 3rem 2rem;
+}
+
+.hero-images {
+    display: flex;
+    justify-content: center; /* center = keep the 3 images grouped in the middle instead of spread out */
+    gap: 1rem;
+    margin: 1.5rem 0;         /* two values = top/bottom, then left/right (0 here) */
+}
+
+.hero-img {
+    max-width: 30%; /* each photo can be at most 30% of the row's width, so all 3 fit side by side */
+    height: auto;
+    border-radius: 8px; /* rounds all 4 corners by 8px */
+}
+
+/* Turns a link into a solid button */
+.cta-button {
+    display: inline-block; /* inline-block = sits in the text flow like a link, but accepts padding/width like a box */
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-top: 1rem;
+}
+
+.cta-button:hover {
+    color: var(--dark-color);
+}
+
+/* Features section ("Why BodyFit Plus") */
+.features {
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+.feature-list {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* Shared card style, reused for .feature, .testimonial and .team-member */
+.feature {
+    max-width: 300px;
+    background-color: white;
+    padding: 1.5rem;              /* same padding on all 4 sides, keeping text away from the border */
+    border-radius: 8px;
+    border: 2px solid var(--dark-color); /* border shorthand = thickness, then style, then color, in that order */
+}
+
+/* Highlights section: testimonials + video, two columns of equal height */
+.highlights {
+    display: flex;
+    align-items: stretch; /* stretch = make both columns match the height of the taller one */
+    gap: 3rem;
+    padding: 3rem 2rem;
+}
+
+.testimonials {
+    flex: 1; /* flex:1 on both this and .video below = split the row evenly, 50/50 */
+}
+
+.testimonial-list {
+    display: flex;
+    flex-direction: column; /* column = stack the 3 testimonial cards vertically, one under another */
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.testimonial {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 2px solid var(--dark-color);
+}
+
+.testimonial span {
+    display: block;       /* block = force this inline <span> onto its own new line */
+    margin-top: 1rem;
+    font-weight: bold;    /* font-weight = how thick/bold the text looks; "bold" = thicker than normal */
+}
+
+.video {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.video iframe {
+    flex: 1;       /* grows to fill the remaining height of its column */
+    width: 100%;
+    margin-top: 1rem;
+}
+
+/* Footer: same dark style as the header, repeated on every page */
+footer {
+    background-color: var(--dark-color);
+    color: white;
+    padding: 2rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap; /* wrap = if the 3 columns don't fit in one row, move extra ones to a new line */
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-column a:hover {
+    color: var(--primary-color);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.9rem; /* 0.9rem = slightly smaller than the page's normal 1rem (16px) text */
+}
+
+/* About Us: Our Story + Our Values side by side */
+.about-intro {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* flex-start = align both columns to the top, instead of stretching/centering */
+    gap: 10rem;
+    padding: 1em 2rem; /* em is relative to THIS element's own font-size, unlike rem (relative to the root) */
+    text-align: left; /* overrides the centered text used elsewhere, since a paragraph reads better left-aligned */
+}
+
+.about-text, .about-values {
+    flex: 1;
+}
+
+.about-values ul {
+    list-style: none;
+}
+
+.about-values li {
+    margin-bottom: 1rem;
+}
+
+/* Meet the Team */
+.team {
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+.team-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.team-member {
+    max-width: 300px;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 2px solid var(--dark-color);
+}
+
+/* object-fit crops the photo to fill the circle instead of stretching it */
+.team-img {
+    width: 250px;
+    height: 300px;
+    object-fit: cover;    /* cover = fill the whole box, cropping any extra, instead of squashing the photo */
+    border-radius: 50%;   /* 50% on a square-ish box turns it into a perfect circle */
+    margin-bottom: 1rem;
+}
+
+/* Plans page: pricing table */
+.plans {
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+table {
+    width: 100%;
+    max-width: 900px;
+    margin: 2rem auto; /* auto on left/right centers the table horizontally on the page */
+    border-collapse: collapse; /* merges cell borders instead of doubling them */
+}
+
+th, td {
+    border: 1px solid var(--dark-color);
+    padding: 0.75rem;
+    text-align: center;
+}
+
+thead {
+    background-color: var(--dark-color);
+    color: white;
+}
+
+/* Zebra stripes: alternating row colors make the table easier to read */
+tbody tr:nth-child(even) {
+    background-color: var(--light-color); /* nth-child(even) = every 2nd row (2nd, 4th, 6th...) */
+}
+
+tbody tr:nth-child(odd) {
+    background-color: white; /* nth-child(odd) = every 1st row (1st, 3rd, 5th...) */
+}
+
+/* Equipment page: photo gallery */
+.equipment-gallery {
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+/* CSS Grid with 2 equal columns; photos wrap into new rows automatically */
+.gallery {
+    display: grid;                         /* grid = arrange children in rows AND columns at once */
+    grid-template-columns: repeat(2, 1fr);  /* 2 columns, each taking an equal (1fr) share of the width */
+    gap: 1.5rem;                            /* space between every photo, in both directions at once */
+    margin-top: 2rem;
+}
+
+figure img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+figcaption {
+    margin-top: 0.5rem;
+    font-weight: bold;
+}
+
+/* Contact page: validated form */
+.contact-form-section {
+    max-width: 600px;
+    margin: 0 auto; /* centers the form and caps its width so lines of text don't stretch too wide */
+    padding: 3rem 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem; /* space below each label+input pair, separating it from the next field */
+}
+
+.form-group label {
+    display: block; /* forces the label onto its own line, above the input, instead of sitting inline */
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--dark-color);
+    border-radius: 6px;
+    font-family: inherit; /* without this, browsers give form fields a different default font */
+}
+
+/* Filled in by js/script.js when a field fails validation */
+.error-message {
+    display: block;
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+form button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer; /* changes the mouse icon to a hand, signalling the button is clickable */
+    font-size: 1rem;
+}
+
+form button:hover {
+    background-color: var(--dark-color);
+}
