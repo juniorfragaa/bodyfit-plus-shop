@@ -18,6 +18,9 @@ CREATE TABLE IF NOT EXISTS products(
     image VARCHAR(255) NOT NULL
 );
 
+-- EMPTY THE PRODUCTS TABLE FIRST, SO RUNNING THIS FILE AGAIN DOES NOT DUPLICATE PRODUCTS
+TRUNCATE TABLE products;
+
 -- INSERT THE 6 PRODUCTS SOLD IN THE SHOP
 INSERT INTO products (name, description, price, image) VALUES
 ('Premium', 'Business-hours gym access, app workouts and a monthly workout plan.', 45.00, 'images/premium.png'),
@@ -28,3 +31,15 @@ INSERT INTO products (name, description, price, image) VALUES
 ('BodyFit Bottle', 'Keeps your drinks cold for hours. With handle and straw.', 12.00, 'images/bottle.png');
 
 SELECT * FROM products;
+
+-- CREATE THE ORDERS TABLE (STORES ORDERS PLACED AT CHECKOUT)
+CREATE TABLE IF NOT EXISTS orders(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_name VARCHAR(100) NOT NULL,
+    customer_email VARCHAR(255) NOT NULL,
+    items VARCHAR(500) NOT NULL,
+    total DECIMAL(10,2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
