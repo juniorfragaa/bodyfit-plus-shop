@@ -5,6 +5,9 @@
 const express = require("express");
 const path = require("path");
 
+// I use crypto (built into Node.js) to hash the passwords
+const crypto = require("crypto");
+
 // I import the database connection I created in database.js
 const connection = require("./database");
 
@@ -31,6 +34,102 @@ app.get("/products", function (req, res) {
             return res.status(500).json({ message: "Could not load products" });
         }
         res.json(results);
+    });
+});
+
+// I hash a password with a salt using scrypt (from the Login handbook)
+function hashPassword(password, salt) {
+    return crypto.scryptSync(password, salt, 64).toString("hex");
+}
+
+// REGISTER: I check the data, hash the password and save the new user
+app.post("/register", function (req, res) {
+    let { name, email, password } = req.body || {};
+
+    // If a field is missing or the password is too short, I send 400 (invalid data)
+    if (typeof name !== "string" ||
+        typeof email !== "string" ||
+        typeof password !== "string" ||
+        name.trim() === "" ||
+        email.trim() === "" ||
+        password.length < 8) {
+        return res.status(400).json({
+            message: "Enter valid details and a password of at least 8 characters"
+        });
+    }
+
+    // I save emails in lower case so "Ana@Mail.com" and "ana@mail.com" count as the same
+    email = email.trim().toLowerCase();
+
+    // I create a random salt and save it together with the hash as "salt:hash"
+    let salt = crypto.randomBytes(16).toString("hex");
+    let hashedPassword = salt + ":" + hashPassword(password, salt);
+
+    // I use ? placeholders so the user's input never becomes part of the SQL (protects against SQL injection)
+    let sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
+
+    connection.query(sql, [name.trim(), email, hashedPassword], function (error, result) {
+        if (error) {
+            // The email column is UNIQUE, so MySQL refuses a repeated email. I send 409
+            if (error.code === "ER_DUP_ENTRY") {
+                return res.status(409).json({ message: "Email already registered" });
+            }
+            return res.status(500).json({ message: "Registration failed" });
+        }
+        res.json({ message: "Registration successful! Please login." });
+    });
+});
+
+// LOGIN: I find the user by email and compare the password hashes
+app.post("/login", function (req, res) {
+    let { email, password } = req.body || {};
+
+    if (typeof email !== "string" ||
+        typeof password !== "string" ||
+        email.trim() === "" || password === "") {
+        return res.status(400).json({ message: "Please enter email and password" });
+    }
+
+    email = email.trim().toLowerCase();
+    let sql = "SELECT * FROM users WHERE email = ?";
+
+    connection.query(sql, [email], function (error, results) {
+        if (error) {
+            return res.status(500).json({ message: "Login failed" });
+        }
+        // No user with this email: I send 401 (wrong login details)
+        if (results.length === 0) {
+            return res.status(401).json({ message: "Invalid email or password" });
+        }
+
+        // I split the saved password into the salt and the hash
+        let user = results[0];
+        let parts = user.password.split(":");
+        if (parts.length !== 2) {
+            return res.status(500).json({ message: "Login failed" });
+        }
+
+        let salt = parts[0];
+        let storedHash = parts[1];
+
+        // I hash the password the user typed with the same salt and compare both hashes
+        let enteredHash = hashPassword(password, salt);
+        let storedBuffer = Buffer.from(storedHash, "hex");
+        let enteredBuffer = Buffer.from(enteredHash, "hex");
+        let passwordMatches =
+            storedBuffer.length === enteredBuffer.length &&
+            crypto.timingSafeEqual(storedBuffer, enteredBuffer);
+
+        if (!passwordMatches) {
+            return res.status(401).json({ message: "Invalid email or password" });
+        }
+
+        // I also send back the name and email, so the shop can show who is logged in
+        res.json({
+            message: "Login successful! Welcome " + user.name,
+            name: user.name,
+            email: user.email
+        });
     });
 });
 
