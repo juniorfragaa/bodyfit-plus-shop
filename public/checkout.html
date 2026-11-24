@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BodyFit Plus - Checkout</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- I repeat the same header (logo and navigation) on every page so the site looks consistent -->
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo.png" alt="BodyFit Plus logo">
+                <h1 class="sr-only">BodyFit Plus</h1>
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="plans.html">Plans</a></li>
+                <li><a href="products.html">Shop</a></li>
+                <li><a href="equipment.html">Equipment</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="basket.html" id="basket-link">Basket</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="contact-form-section">
+            <h2>Checkout</h2>
+
+            <!-- My JavaScript fills this with the products in the basket and the total -->
+            <div id="checkout-summary" class="checkout-summary"></div>
+            <p id="checkout-total" class="basket-total"></p>
+
+            <!-- No real payment: the customer only gives a name and email to place the order -->
+            <form id="checkoutForm">
+                <div class="form-group">
+                    <label for="checkoutName">Name</label>
+                    <input type="text" id="checkoutName" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkoutEmail">Email</label>
+                    <input type="email" id="checkoutEmail" required>
+                </div>
+                <button type="submit">Place order</button>
+            </form>
+
+            <!-- I show the confirmation (or an error) from the server here -->
+            <p id="message" class="form-message"></p>
+
+            <!-- I hide this button at first. My JavaScript shows it after the order is placed -->
+            <a href="index.html" id="home-link" class="cta-button" style="display: none;">Back to home</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>BodyFit Plus</h3>
+                <p>Your all-in-one gym, nutrition, and personal training experience.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="plans.html">Plans</a></li>
+                    <li><a href="products.html">Shop</a></li>
+                    <li><a href="equipment.html">Equipment</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <p>123 Fitness Street, Dublin</p>
+                <p>Phone: (01) 234 5678</p>
+            </div>
+        </div>
+        <p class="footer-bottom">&copy; 2026 BodyFit Plus. All rights reserved.</p>
+    </footer>
+
+    <!-- I load the script at the end of the body so the page already exists when the script runs -->
+    <script src="js/script.js"></script>
+</body>
+</html>

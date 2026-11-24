@@ -391,3 +391,89 @@ async function showBasket() {
         basketList.innerHTML = "<p>Unable to load the basket. Please try again.</p>";
     }
 }
+
+// CHECKOUT PAGE
+// I only run this if the page has the checkout form (checkout.html)
+const checkoutForm = document.getElementById("checkoutForm");
+
+if (checkoutForm) {
+    showCheckout();
+
+    checkoutForm.addEventListener("submit", async function (event) {
+        // I stop the form from reloading the page
+        event.preventDefault();
+
+        let name = document.getElementById("checkoutName").value;
+        let email = document.getElementById("checkoutEmail").value;
+        let message = document.getElementById("message");
+
+        try {
+            // I send the name and email to my /orders route. The server reads the basket itself
+            let response = await fetch("/orders", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name: name, email: email })
+            });
+            let data = await response.json();
+
+            // I show the confirmation message from the server
+            message.textContent = data.message;
+
+            // If the order was placed, the basket is now empty, so I hide the form and update the page
+            if (response.status === 200) {
+                checkoutForm.style.display = "none";
+                document.getElementById("home-link").style.display = "inline-block";
+                document.getElementById("checkout-summary").style.display = "none";
+                document.getElementById("checkout-total").textContent = "";
+                updateBasketCount();
+            }
+        } catch (error) {
+            message.textContent = "Unable to connect to server";
+        }
+    });
+}
+
+// I show a summary of the basket on the checkout page: one line per product and the total
+async function showCheckout() {
+    let summary = document.getElementById("checkout-summary");
+
+    try {
+        let productsResponse = await fetch("/products");
+        let products = await productsResponse.json();
+        let basketResponse = await fetch("/basket");
+        let basket = await basketResponse.json();
+
+        if (basket.length === 0) {
+            summary.innerHTML = "<p>Your basket is empty. <a href='products.html'>Go to the shop</a></p>";
+            document.getElementById("checkout-total").textContent = "";
+            return;
+        }
+
+        let output = "";
+        let total = 0;
+
+        for (let i = 0; i < basket.length; i++) {
+            for (let j = 0; j < products.length; j++) {
+                if (products[j].id === basket[i].product_id) {
+                    let price = parseInt(products[j].price);
+                    let subtotal = price * basket[i].quantity;
+                    total = total + subtotal;
+
+                    let unit = "";
+                    if (products[j].category === "plan") {
+                        unit = " " + monthWord(basket[i].quantity);
+                    }
+
+                    output += "<p>" + products[j].name + " x " + basket[i].quantity + unit +
+                              " <strong>€" + subtotal + "</strong></p>";
+                }
+            }
+        }
+
+        summary.innerHTML = output;
+        document.getElementById("checkout-total").textContent = "Total: €" + total;
+    } catch (error) {
+        console.log(error);
+        summary.innerHTML = "<p>Unable to load your order. Please try again.</p>";
+    }
+}

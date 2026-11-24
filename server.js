@@ -217,6 +217,75 @@ app.post("/basket/remove", function (req, res) {
     });
 });
 
+// CHECKOUT
+// I place the order: I read the basket and the products from MySQL, work out the total here on
+// the server (so nobody can change the prices in the browser), save the order and empty the basket
+app.post("/orders", function (req, res) {
+    let { name, email } = req.body || {};
+
+    // If the name or email is missing, I send 400 (invalid data)
+    if (typeof name !== "string" || typeof email !== "string" ||
+        name.trim() === "" || email.trim() === "") {
+        return res.status(400).json({ message: "Please enter your name and email" });
+    }
+
+    connection.query("SELECT * FROM basket", function (error, basket) {
+        if (error) {
+            return res.status(500).json({ message: "Could not place the order" });
+        }
+        if (basket.length === 0) {
+            return res.status(400).json({ message: "Your basket is empty" });
+        }
+
+        connection.query("SELECT * FROM products", function (error, products) {
+            if (error) {
+                return res.status(500).json({ message: "Could not place the order" });
+            }
+
+            // I build the list of items as text, for example "Gold x2 months, Whey Protein x1",
+            // and add up the total
+            let items = [];
+            let total = 0;
+
+            for (let i = 0; i < basket.length; i++) {
+                for (let j = 0; j < products.length; j++) {
+                    if (products[j].id === basket[i].product_id) {
+                        let text = products[j].name + " x" + basket[i].quantity;
+                        // For plans the quantity is months ("month" for 1, "months" for more)
+                        if (products[j].category === "plan" && basket[i].quantity === 1) {
+                            text = text + " month";
+                        } else if (products[j].category === "plan") {
+                            text = text + " months";
+                        }
+                        items.push(text);
+                        total = total + parseInt(products[j].price) * basket[i].quantity;
+                    }
+                }
+            }
+
+            let sql = "INSERT INTO orders (customer_name, customer_email, items, total) VALUES (?, ?, ?, ?)";
+
+            connection.query(sql, [name.trim(), email.trim().toLowerCase(), items.join(", "), total], function (error, result) {
+                if (error) {
+                    return res.status(500).json({ message: "Could not place the order" });
+                }
+
+                // The order is saved, so I empty the basket
+                connection.query("DELETE FROM basket", function (error) {
+                    if (error) {
+                        return res.status(500).json({ message: "Order saved, but the basket could not be emptied" });
+                    }
+                    // result.insertId is the id MySQL gave to the new order
+                    res.json({
+                        message: "Thank you " + name.trim() + "! Your order number " + result.insertId +
+                                 " was placed. Total paid: €" + total
+                    });
+                });
+            });
+        });
+    });
+});
+
 // I connect to MySQL first, so the server only starts if the database is working
 connection.connect(function (error) {
     if (error) {
