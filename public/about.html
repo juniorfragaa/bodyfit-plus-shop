@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Header: logo + main navigation, repeated identically on every page for consistency -->
+    <!-- I repeat the same header (logo and navigation) on every page so the site looks consistent -->
     <header>
-        <!-- Logo image is paired with a visually-hidden h1 (see .sr-only in CSS), so screen
-             readers still announce the brand name even though only the logo is shown -->
+        <!-- I paired the logo with a hidden h1 (.sr-only in the CSS) so screen readers still read
+             the brand name, even though only the logo is visible -->
         <div class="logo">
             <a href="index.html">
                 <img src="images/logo.png" alt="BodyFit Plus logo">
@@ -20,7 +20,7 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <!-- aria-current="page" marks this as the page currently open -->
+                <!-- I used aria-current="page" to tell screen readers which page is open -->
                 <li><a href="about.html" aria-current="page">About Us</a></li>
                 <li><a href="plans.html">Plans</a></li>
                 <li><a href="equipment.html">Equipment</a></li>
@@ -29,8 +29,8 @@
         </nav>
     </header>
     <main>
-<!-- About intro: two columns side by side - the gym's story on the left,
-     its core values on the right (see .about-intro in styles.css) -->
+<!-- About intro: I put the gym's story on the left and its values on the right, in two
+     columns (.about-intro in styles.css) -->
 <section class="about-intro">
     <div class="about-text">
         <h2>Our Story</h2>
@@ -47,7 +47,7 @@
     </div>
 </section>
 
-<!-- Meet the Team: a profile card (photo + name + role) for each trainer and nutritionist -->
+<!-- Meet the Team: I made a card with photo, name and role for each trainer and nutritionist -->
 <section class="team">
     <h2>MEET THE TEAM</h2>
     <div class="team-list">
@@ -79,7 +79,7 @@
     </div>
 </section>
     </main>
-    <!-- Footer: repeated identically on every page - brand blurb, quick links, and contact info -->
+    <!-- I repeat the same footer on every page, with the brand text, quick links and contact info -->
     <footer>
         <div class="footer-content">
             <div class="footer-column">

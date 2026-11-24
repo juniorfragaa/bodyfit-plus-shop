@@ -1,8 +1,8 @@
-// Validates the contact form in the browser, since no server is used in this project
+// I validate the contact form in the browser before it is sent
 const form = document.getElementById("contact-form");
 
 form.addEventListener("submit", function (event) {
-    event.preventDefault(); // stops the page from reloading on submit
+    event.preventDefault(); // I stop the page from reloading when the form is submitted
 
     const name = document.getElementById("name").value;
     const phone = document.getElementById("phone").value;
@@ -11,13 +11,13 @@ form.addEventListener("submit", function (event) {
 
     let isValid = true;
 
-    // clear old error messages before checking again
+    // I clear the old error messages before checking again
     document.getElementById("name-error").textContent = "";
     document.getElementById("phone-error").textContent = "";
     document.getElementById("email-error").textContent = "";
     document.getElementById("message-error").textContent = "";
 
-    // name: required, letters and spaces only
+    // I check the name: required, letters and spaces only
     if (name === "") {
         document.getElementById("name-error").textContent = "Name is required.";
         isValid = false;
@@ -26,7 +26,7 @@ form.addEventListener("submit", function (event) {
         isValid = false;
     }
 
-    // phone: required, digits only, 9 or 10 of them
+    // I check the phone: required, numbers only, 9 or 10 digits
     if (phone === "") {
         document.getElementById("phone-error").textContent = "Phone number is required.";
         isValid = false;
@@ -35,7 +35,7 @@ form.addEventListener("submit", function (event) {
         isValid = false;
     }
 
-    // email and message: just required, no format check
+    // I check that the email and the message are not empty
     if (email === "") {
         document.getElementById("email-error").textContent = "Email is required.";
         isValid = false;

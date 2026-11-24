@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Header: logo + main navigation, repeated identically on every page for consistency -->
+    <!-- I repeat the same header (logo and navigation) on every page so the site looks consistent -->
     <header>
-        <!-- Logo image is paired with a visually-hidden h1 (see .sr-only in CSS), so screen
-             readers still announce the brand name even though only the logo is shown -->
+        <!-- I paired the logo with a hidden h1 (.sr-only in the CSS) so screen readers still read
+             the brand name, even though only the logo is visible -->
         <div class="logo">
             <a href="index.html">
                 <img src="images/logo.png" alt="BodyFit Plus logo">
@@ -21,7 +21,7 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About Us</a></li>
-                <!-- aria-current="page" marks this as the page currently open -->
+                <!-- I used aria-current="page" to tell screen readers which page is open -->
                 <li><a href="plans.html" aria-current="page">Plans</a></li>
                 <li><a href="equipment.html">Equipment</a></li>
                 <li><a href="contact.html">Contact</a></li>
@@ -29,26 +29,25 @@
         </nav>
     </header>
     <main>
-        <!-- Membership comparison table: each row is a feature, each column is a plan
-             (Premium/Gold/Platinum); thead holds the plan names + prices, tbody holds the data -->
+        <!-- Membership table: each row is a feature and each column is a plan (Premium, Gold,
+             Platinum). I put the plan names and prices in thead and the data in tbody -->
         <section class="plans">
     <h2>Choose Your Plan</h2>
     <table>
-        <!-- thead = the table's header row: the column titles (here, the plan
-             names and prices). Browsers style <th> as bold/centered by default -->
+        <!-- I used thead for the header row with the plan names and prices. Browsers show th as bold
+             and centered by default -->
         <thead>
             <tr>
                 <th>Feature</th>
-                <!-- <br> forces a line break inside this single cell, so the plan
-                     name and its price sit on two separate lines instead of one -->
+                <!-- I used br to break the line inside the cell, so the plan name and the price sit on two
+                     lines -->
                 <th>Premium<br>€45/month</th>
                 <th>Gold<br>€60/month</th>
                 <th>Platinum<br>€80/month</th>
             </tr>
         </thead>
-        <!-- tbody = the table's body: every <tr> (row) here is one feature being
-             compared, with a <td> (plain data cell) for the feature name and one
-             more <td> per plan showing what that plan includes -->
+        <!-- I used tbody for the table body. Each tr is one feature, with a td for the feature name
+             and one td per plan showing what that plan includes -->
         <tbody>
             <tr>
                 <td>Gym access</td>
@@ -115,7 +114,7 @@
     <a href="contact.html" class="cta-button">Get Started</a>
 </section>
     </main>
-    <!-- Footer: repeated identically on every page - brand blurb, quick links, and contact info -->
+    <!-- I repeat the same footer on every page, with the brand text, quick links and contact info -->
     <footer>
         <div class="footer-content">
             <div class="footer-column">

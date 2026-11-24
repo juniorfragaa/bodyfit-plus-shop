@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Header: logo + main navigation, repeated identically on every page for consistency -->
+    <!-- I repeat the same header (logo and navigation) on every page so the site looks consistent -->
     <header>
-        <!-- Logo image is paired with a visually-hidden h1 (see .sr-only in CSS), so screen
-             readers still announce the brand name even though only the logo is shown -->
+        <!-- I paired the logo with a hidden h1 (.sr-only in the CSS) so screen readers still read
+             the brand name, even though only the logo is visible -->
         <div class="logo">
             <a href="index.html">
                 <img src="images/logo.png" alt="BodyFit Plus logo">
@@ -23,64 +23,60 @@
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="plans.html">Plans</a></li>
                 <li><a href="equipment.html">Equipment</a></li>
-                <!-- aria-current="page" marks this as the page currently open -->
+                <!-- I used aria-current="page" to tell screen readers which page is open -->
                 <li><a href="contact.html" aria-current="page">Contact</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <!-- Contact form: validated entirely with JavaScript (js/script.js), not the browser's
-             built-in validation - that's why novalidate is used below. Each field has an empty
-             <span class="error-message"> next to it, which the JS fills in when a check fails -->
+        <!-- Contact form: I validate it with my own JavaScript (js/script.js) instead of the
+             browser's built-in validation, so I added novalidate below. Each field has an empty span
+             with the class error-message, and my JS fills it when a check fails -->
         <section class="contact-form-section">
     <h2>Get In Touch</h2>
     <p>Fill out the form below and we'll get back to you as soon as possible.</p>
-    <!-- novalidate turns off the browser's own error popups, so our own JS is fully in control -->
+    <!-- I added novalidate to turn off the browser's own error popups, so my JavaScript is in full control -->
     <form id="contact-form" novalidate>
-        <!-- Each field follows the same pattern: a <label> describing it, the
-             <input>/<textarea> itself, and an empty <span> that JavaScript fills
-             with an error message if this specific field fails validation.
-             label's "for" must exactly match the input's "id" below it - that
-             link is what lets a screen reader announce "Name" when this field
-             gets focus, and lets clicking the word "Name" focus the input too. -->
+        <!-- I built every field the same way: a label, the input or textarea, and an empty span that
+             my JavaScript fills with an error message. The label's for must match the input's id, so
+             screen readers announce "Name" when the field gets focus, and clicking the word "Name"
+             puts the cursor in the input -->
         <div class="form-group">
             <label for="name">Name</label>
-            <!-- type="text" plus name="name" so the input has both an id (used by
-                 the label and by JavaScript) and a name (the standard attribute
-                 form fields are supposed to have) -->
+            <!-- I gave the input an id (used by the label and my JavaScript) and a name, which form
+                 fields are supposed to have -->
             <input type="text" id="name" name="name">
             <span class="error-message" id="name-error"></span>
         </div>
         <div class="form-group">
             <label for="phone">Phone Number</label>
-            <!-- type="text" (not type="number" or type="tel") because those would
-                 let the browser add its own formatting/spinner controls - keeping
-                 it plain text means OUR JavaScript regex is the only thing checking it -->
+            <!-- I used type="text" instead of number or tel, because those add the browser's own
+                 formatting and spinner. This way my JavaScript regex is the only thing checking the
+                 phone number -->
             <input type="text" id="phone" name="phone">
             <span class="error-message" id="phone-error"></span>
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <!-- type="email" gives mobile users an @ key on their keyboard, but the
-                 real validation of this field still happens in JavaScript (see the
-                 "email is required" check in js/script.js) -->
+            <!-- I used type="email" so phones show the @ key on the keyboard. The real check for this
+                 field is still in my JavaScript (the "Email is required" check in js/script.js) -->
             <input type="email" id="email" name="email">
             <span class="error-message" id="email-error"></span>
         </div>
         <div class="form-group">
             <label for="message">Nature of Your Query</label>
-            <!-- <textarea> instead of <input> because it allows multiple lines of
-                 text; rows="5" sets its starting height to roughly 5 lines -->
+            <!-- I used a textarea instead of an input because it allows several lines of text. rows="5"
+                 makes it start about 5 lines tall -->
             <textarea id="message" name="message" rows="5"></textarea>
             <span class="error-message" id="message-error"></span>
         </div>
-        <!-- type="submit" is what makes clicking this button trigger the form's
-             "submit" event that js/script.js is listening for -->
+        <!-- I used type="submit" so clicking this button fires the form's submit event, which my
+             js/script.js is listening for -->
         <button type="submit">Send Message</button>
     </form>
 </section>
     </main>
-    <!-- Footer: repeated identically on every page - brand blurb, quick links, and contact info -->
+    <!-- I repeat the same footer on every page, with the brand text, quick links and contact info -->
     <footer>
         <div class="footer-content">
             <div class="footer-column">
@@ -105,8 +101,8 @@
         </div>
         <p class="footer-bottom">&copy; 2026 BodyFit Plus. All rights reserved.</p>
     </footer>
-    <!-- Loaded at the end of body so the form/inputs already exist in the page
-         before this script tries to find them -->
+    <!-- I load the script at the end of the body so the form already exists on the page when the
+         script looks for it -->
     <script src="js/script.js"></script>
 </body>
 </html>

@@ -1,79 +1,79 @@
-/* Reset: removes default browser spacing so every page starts from the same baseline */
+/* Reset: I remove the browser's default spacing so every page starts from the same point */
 * {
-    margin: 0;    /* margin = invisible space OUTSIDE an element's border, pushing other elements away */
-    padding: 0;   /* padding = invisible space INSIDE an element, between its border and its own content */
-    box-sizing: border-box; /* padding/border no longer add to the element's set width */
+    margin: 0;    /* margin is the invisible space OUTSIDE an element's border. I set it to 0 */
+    padding: 0;   /* padding is the invisible space INSIDE an element, between its border and its content. I set it to 0 */
+    box-sizing: border-box; /* I used border-box so padding and border no longer add to the width I set */
 }
 
-/* Base styles + sticky footer: body stretches to fill the screen, main grows to
-   push the footer to the bottom even on short pages */
+/* Base styles and sticky footer: I make the body fill the screen and let main grow, so the
+   footer stays at the bottom even on short pages */
 body {
-    font-family: Arial, sans-serif; /* font-family = which font the text uses; the 2nd name is a fallback */
-    color: #222;                    /* color = the TEXT color (almost black here, not pure #000) */
-    line-height: 1.5;                /* line-height = the height of each line of text, 1.5x the font size */
+    font-family: Arial, sans-serif; /* I chose the font here. The second name is a fallback if the first is missing */
+    color: #222;                    /* I set the text color to almost black instead of pure #000 */
+    line-height: 1.5;                /* I set the line height to 1.5 times the font size so the text is easier to read */
     background-color: var(--light-color);
-    min-height: 100vh;          /* vh = % of the screen's visible height; 100vh = at least the full screen */
-    display: flex;              /* flex = lay out this element's direct children in a single row or column */
-    flex-direction: column;     /* column = stack header/main/footer top to bottom instead of side by side */
+    min-height: 100vh;          /* vh is a percentage of the screen height. With 100vh the body is at least as tall as the screen */
+    display: flex;              /* I used flex to lay out the body's children in a single column */
+    flex-direction: column;     /* I used column so header, main and footer stack from top to bottom */
 }
 
 main {
-    flex: 1; /* flex:1 = grow and fill any leftover vertical space, which pushes the footer to the bottom */
+    flex: 1; /* I gave main flex: 1 so it fills the leftover space and pushes the footer down */
 }
 
-/* Brand colors stored as variables, so they only need to change in one place */
+/* I stored the brand colors as variables, so I only need to change them in one place */
 :root {
     --primary-color: #ED1B2F;
     --dark-color: #1a1a1a;
     --light-color: #f4f4f4;
 }
 
-/* Header: dark bar, logo on one side and nav on the other */
+/* Header: I made a dark bar with the logo on one side and the menu on the other */
 header {
     background-color: var(--dark-color);
     color: white;
-    padding: 1rem 2rem;              /* two values = top/bottom then left/right (1rem = 16px, 2rem = 32px) */
+    padding: 1rem 2rem;              /* Two values: the first is top and bottom, the second is left and right (1rem = 16px, 2rem = 32px) */
     display: flex;
-    justify-content: space-between;  /* space-between = push the first child left and the last child right */
-    align-items: center;             /* align-items = line children up on the cross axis (here, vertically) */
+    justify-content: space-between;  /* I used space-between to push the logo to the left and the menu to the right */
+    align-items: center;             /* I used align-items to center the logo and the menu vertically */
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 0.5rem; /* gap = fixed space BETWEEN flex children, without needing separate margins */
+    gap: 0.5rem; /* I used gap to add space between the flex children without extra margins */
 }
 
 .logo a {
     display: flex;
     align-items: center;
-    text-decoration: none; /* removes the underline a browser normally puts on links */
-    color: inherit;        /* inherit = use the parent's text color instead of the default link blue */
+    text-decoration: none; /* I removed the underline that browsers put on links */
+    color: inherit;        /* I used inherit so the link takes its parent's text color instead of the default blue */
 }
 
 .logo img {
     height: 40px;
-    width: auto; /* auto = scale the width automatically so the logo keeps its real proportions */
+    width: auto; /* I set the width to auto so the logo keeps its real proportions */
 }
 
-/* Hides an element visually while screen readers can still read it */
+/* I use this class to hide an element on screen while screen readers can still read it */
 .sr-only {
-    position: absolute;       /* takes it out of the normal page flow, so it can't push other content */
+    position: absolute;       /* I used position: absolute to take it out of the page flow so it can't push other content */
     width: 1px;
     height: 1px;
     padding: 0;
-    margin: -1px;              /* pulls the 1px box back in so it doesn't nudge nearby layout at all */
-    overflow: hidden;          /* hides any part of the content that doesn't fit inside that 1x1px box */
-    clip: rect(0, 0, 0, 0);    /* an older, extra-safe way to clip an element down to nothing visible */
-    white-space: nowrap;       /* stops the text from wrapping onto a 2nd line and becoming tall enough to show */
+    margin: -1px;              /* I pull the 1px box back in so it doesn't move anything around it */
+    overflow: hidden;          /* I hide anything that doesn't fit inside the 1x1px box */
+    clip: rect(0, 0, 0, 0);    /* I added this older clip rule as an extra way to hide the element */
+    white-space: nowrap;       /* I stop the text from wrapping, so it can't grow tall enough to show */
     border: 0;
 }
 
-/* Nav menu: horizontal row instead of a bulleted list */
+/* Nav menu: I show the links in a row instead of a bulleted list */
 nav ul {
-    list-style: none;  /* removes the default bullet point in front of each <li> */
+    list-style: none;  /* I removed the default bullet in front of each li */
     display: flex;
-    gap: 1.5rem;        /* 1.5rem (24px) of space between each nav link */
+    gap: 1.5rem;        /* I added 1.5rem (24px) of space between the menu links */
 }
 
 nav a {
@@ -82,31 +82,31 @@ nav a {
 }
 
 nav a:hover {
-    color: var(--primary-color); /* :hover = applies only while the mouse is actually over the link */
+    color: var(--primary-color); /* I used :hover so this style only applies while the mouse is over the link */
 }
 
-/* Hero section (Home page banner) */
+/* Hero section (the banner on the Home page) */
 .hero {
-    text-align: center; /* text-align = horizontal alignment of inline content (text, inline-block links...) */
+    text-align: center; /* I used text-align to center the text and inline content */
     padding: 3rem 2rem;
 }
 
 .hero-images {
     display: flex;
-    justify-content: center; /* center = keep the 3 images grouped in the middle instead of spread out */
+    justify-content: center; /* I used center to keep the 3 photos together in the middle */
     gap: 1rem;
-    margin: 1.5rem 0;         /* two values = top/bottom, then left/right (0 here) */
+    margin: 1.5rem 0;         /* Two values: top and bottom first, then left and right (0 here) */
 }
 
 .hero-img {
-    max-width: 30%; /* each photo can be at most 30% of the row's width, so all 3 fit side by side */
+    max-width: 30%; /* I limited each photo to 30% of the row so all 3 fit side by side */
     height: auto;
-    border-radius: 8px; /* rounds all 4 corners by 8px */
+    border-radius: 8px; /* I rounded all 4 corners by 8px */
 }
 
-/* Turns a link into a solid button */
+/* I use this class to turn a link into a solid button */
 .cta-button {
-    display: inline-block; /* inline-block = sits in the text flow like a link, but accepts padding/width like a box */
+    display: inline-block; /* I used inline-block so the link stays in the text flow but accepts padding like a box */
     background-color: var(--primary-color);
     color: white;
     padding: 0.75rem 1.5rem;
@@ -132,30 +132,30 @@ nav a:hover {
     margin-top: 2rem;
 }
 
-/* Shared card style, reused for .feature, .testimonial and .team-member */
+/* I made one card style and reused it for .feature, .testimonial and .team-member */
 .feature {
     max-width: 300px;
     background-color: white;
-    padding: 1.5rem;              /* same padding on all 4 sides, keeping text away from the border */
+    padding: 1.5rem;              /* I used the same padding on all 4 sides to keep the text away from the border */
     border-radius: 8px;
-    border: 2px solid var(--dark-color); /* border shorthand = thickness, then style, then color, in that order */
+    border: 2px solid var(--dark-color); /* Border shorthand: I wrote the thickness, then the style, then the color */
 }
 
-/* Highlights section: testimonials + video, two columns of equal height */
+/* Highlights section: I placed the testimonials and the video in two columns of the same height */
 .highlights {
     display: flex;
-    align-items: stretch; /* stretch = make both columns match the height of the taller one */
+    align-items: stretch; /* I used stretch so both columns match the height of the taller one */
     gap: 3rem;
     padding: 3rem 2rem;
 }
 
 .testimonials {
-    flex: 1; /* flex:1 on both this and .video below = split the row evenly, 50/50 */
+    flex: 1; /* I gave flex: 1 to this and to .video below, so the row is split 50/50 */
 }
 
 .testimonial-list {
     display: flex;
-    flex-direction: column; /* column = stack the 3 testimonial cards vertically, one under another */
+    flex-direction: column; /* I used column to stack the 3 testimonial cards one under another */
     gap: 1rem;
     margin-top: 1rem;
 }
@@ -168,9 +168,9 @@ nav a:hover {
 }
 
 .testimonial span {
-    display: block;       /* block = force this inline <span> onto its own new line */
+    display: block;       /* I used display: block to put this span on its own line */
     margin-top: 1rem;
-    font-weight: bold;    /* font-weight = how thick/bold the text looks; "bold" = thicker than normal */
+    font-weight: bold;    /* I used font-weight bold to make the text thicker */
 }
 
 .video {
@@ -180,12 +180,12 @@ nav a:hover {
 }
 
 .video iframe {
-    flex: 1;       /* grows to fill the remaining height of its column */
+    flex: 1;       /* I let it grow to fill the rest of its column's height */
     width: 100%;
     margin-top: 1rem;
 }
 
-/* Footer: same dark style as the header, repeated on every page */
+/* Footer: I used the same dark style as the header */
 footer {
     background-color: var(--dark-color);
     color: white;
@@ -196,7 +196,7 @@ footer {
     display: flex;
     justify-content: center;
     gap: 3rem;
-    flex-wrap: wrap; /* wrap = if the 3 columns don't fit in one row, move extra ones to a new line */
+    flex-wrap: wrap; /* I used wrap so the columns move to a new line when they don't fit */
 }
 
 .footer-column ul {
@@ -215,17 +215,17 @@ footer {
 .footer-bottom {
     text-align: center;
     margin-top: 2rem;
-    font-size: 0.9rem; /* 0.9rem = slightly smaller than the page's normal 1rem (16px) text */
+    font-size: 0.9rem; /* I used 0.9rem so this text is slightly smaller than the normal 1rem (16px) */
 }
 
-/* About Us: Our Story + Our Values side by side */
+/* About Us: I placed Our Story and Our Values side by side */
 .about-intro {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* flex-start = align both columns to the top, instead of stretching/centering */
+    align-items: flex-start; /* I used flex-start to align both columns to the top */
     gap: 10rem;
-    padding: 1em 2rem; /* em is relative to THIS element's own font-size, unlike rem (relative to the root) */
-    text-align: left; /* overrides the centered text used elsewhere, since a paragraph reads better left-aligned */
+    padding: 1em 2rem; /* I used em, which is relative to this element's font size (rem is relative to the root) */
+    text-align: left; /* I aligned the paragraph to the left, because it reads better than centered text */
 }
 
 .about-text, .about-values {
@@ -262,12 +262,12 @@ footer {
     border: 2px solid var(--dark-color);
 }
 
-/* object-fit crops the photo to fill the circle instead of stretching it */
+/* I used object-fit so the photo fills the circle instead of stretching */
 .team-img {
     width: 250px;
     height: 300px;
-    object-fit: cover;    /* cover = fill the whole box, cropping any extra, instead of squashing the photo */
-    border-radius: 50%;   /* 50% on a square-ish box turns it into a perfect circle */
+    object-fit: cover;    /* I used cover so the photo fills the whole box and the extra is cropped */
+    border-radius: 50%;   /* I used 50% to turn the square photo into a circle */
     margin-bottom: 1rem;
 }
 
@@ -280,8 +280,8 @@ footer {
 table {
     width: 100%;
     max-width: 900px;
-    margin: 2rem auto; /* auto on left/right centers the table horizontally on the page */
-    border-collapse: collapse; /* merges cell borders instead of doubling them */
+    margin: 2rem auto; /* I used auto on left and right to center the table on the page */
+    border-collapse: collapse; /* I used collapse so the cell borders merge instead of doubling */
 }
 
 th, td {
@@ -295,13 +295,13 @@ thead {
     color: white;
 }
 
-/* Zebra stripes: alternating row colors make the table easier to read */
+/* Zebra stripes: I alternated the row colors to make the table easier to read */
 tbody tr:nth-child(even) {
-    background-color: var(--light-color); /* nth-child(even) = every 2nd row (2nd, 4th, 6th...) */
+    background-color: var(--light-color); /* nth-child(even) selects every second row (2nd, 4th, 6th...) */
 }
 
 tbody tr:nth-child(odd) {
-    background-color: white; /* nth-child(odd) = every 1st row (1st, 3rd, 5th...) */
+    background-color: white; /* nth-child(odd) selects the other rows (1st, 3rd, 5th...) */
 }
 
 /* Equipment page: photo gallery */
@@ -310,11 +310,11 @@ tbody tr:nth-child(odd) {
     padding: 3rem 2rem;
 }
 
-/* CSS Grid with 2 equal columns; photos wrap into new rows automatically */
+/* I used CSS Grid with 2 equal columns, so the photos wrap into new rows by themselves */
 .gallery {
-    display: grid;                         /* grid = arrange children in rows AND columns at once */
-    grid-template-columns: repeat(2, 1fr);  /* 2 columns, each taking an equal (1fr) share of the width */
-    gap: 1.5rem;                            /* space between every photo, in both directions at once */
+    display: grid;                         /* I used display: grid to arrange the children in rows and columns at the same time */
+    grid-template-columns: repeat(2, 1fr);  /* I made 2 columns, each with an equal share (1fr) of the width */
+    gap: 1.5rem;                            /* I added space between the photos in both directions */
     margin-top: 2rem;
 }
 
@@ -332,16 +332,16 @@ figcaption {
 /* Contact page: validated form */
 .contact-form-section {
     max-width: 600px;
-    margin: 0 auto; /* centers the form and caps its width so lines of text don't stretch too wide */
+    margin: 0 auto; /* I centered the form and limited its width so the lines don't get too long */
     padding: 3rem 2rem;
 }
 
 .form-group {
-    margin-bottom: 1.5rem; /* space below each label+input pair, separating it from the next field */
+    margin-bottom: 1.5rem; /* I added space below each label and input, to separate the fields */
 }
 
 .form-group label {
-    display: block; /* forces the label onto its own line, above the input, instead of sitting inline */
+    display: block; /* I put the label on its own line above the input */
     margin-bottom: 0.5rem;
     font-weight: bold;
 }
@@ -352,10 +352,10 @@ figcaption {
     padding: 0.75rem;
     border: 1px solid var(--dark-color);
     border-radius: 6px;
-    font-family: inherit; /* without this, browsers give form fields a different default font */
+    font-family: inherit; /* I added this because browsers give form fields a different default font */
 }
 
-/* Filled in by js/script.js when a field fails validation */
+/* My js/script.js fills this in when a field fails validation */
 .error-message {
     display: block;
     color: red;
@@ -369,7 +369,7 @@ form button {
     padding: 0.75rem 1.5rem;
     border: none;
     border-radius: 6px;
-    cursor: pointer; /* changes the mouse icon to a hand, signalling the button is clickable */
+    cursor: pointer; /* I changed the mouse pointer to a hand to show the button is clickable */
     font-size: 1rem;
 }
 

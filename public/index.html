@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Header: logo + main navigation, repeated identically on every page for consistency -->
+    <!-- I repeat the same header (logo and navigation) on every page so the site looks consistent -->
     <header>
-        <!-- Logo image is paired with a visually-hidden h1 (see .sr-only in CSS), so screen
-             readers still announce the brand name even though only the logo is shown -->
+        <!-- I paired the logo with a hidden h1 (.sr-only in the CSS) so screen readers still read
+             the brand name, even though only the logo is visible -->
         <div class="logo">
             <a href="index.html">
                 <img src="images/logo.png" alt="BodyFit Plus logo">
@@ -19,8 +19,8 @@
         </div>
         <nav>
             <ul>
-                <!-- aria-current="page" tells assistive tech which page is currently open;
-                     it moves to a different link on each page -->
+                <!-- I used aria-current="page" to tell screen readers which page is open. I move it to a
+                     different link on each page -->
                 <li><a href="index.html" aria-current="page">Home</a></li>
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="plans.html">Plans</a></li>
@@ -30,8 +30,8 @@
         </nav>
     </header>
     <main>
-    <!-- Hero section: the first thing visitors see - headline, photos, and a call-to-action
-         button pointing straight to the Plans page -->
+    <!-- Hero section: this is the first thing visitors see. I put the headline, three photos and
+         a button that goes straight to the Plans page -->
     <section class="hero">
         <h2>Train Smart! Eat Right! See Results!</h2>
         <p> At BodyFit Plus, every membership includes real nutritionist and personal trainer support, it's not just gym access </p>
@@ -42,7 +42,7 @@
         </div>
         <a href="plans.html" class="cta-button">View our Plans</a>
     </section>
- <!-- Features section: highlights the 3 key differentiators of the gym -->
+ <!-- Features section: I show the 3 main things that make the gym different -->
  <section class="features">
     <h2>Why BodyFit Plus ?</h2>
     <div class="feature-list">
@@ -61,8 +61,8 @@
     </div>
 </section>
 
-<!-- Highlights section: testimonials and the demo video shown as two side-by-side columns
-     (each column is stretched to the same height using CSS flexbox, see .highlights in styles.css) -->
+<!-- Highlights section: I placed the testimonials and the demo video in two columns side by
+     side. I used flexbox so both columns have the same height (.highlights in styles.css) -->
 <section class="highlights">
     <div class="testimonials">
         <h2>What Our Members Say</h2>
@@ -81,14 +81,11 @@
             </div>
         </div>
     </div>
-    <!-- Embedded YouTube video via iframe - adds a second type of media besides photos.
-         An <iframe> embeds another web page (here, YouTube's video player) inside this one:
-           - width/height: starting size in pixels (CSS later makes it stretch/resize)
-           - src: the special "embed" link YouTube generates for a video (different
-             from the normal watch link) - this is what actually loads the player
-           - title: a short description read by screen readers, since the iframe's
-             content itself isn't part of this page's HTML
-           - allowfullscreen: lets the visitor expand the video to fullscreen -->
+    <!-- I embedded a YouTube video with an iframe to add a second type of media besides photos.
+         An iframe loads another web page (YouTube's player) inside mine. width and height give
+         the starting size, and my CSS resizes it later. src is the special embed link YouTube
+         gives for a video, which is different from the normal watch link. title is a short
+         description for screen readers. allowfullscreen lets the visitor watch in full screen -->
     <div class="video">
         <h2>See How It Works</h2>
         <iframe width="640" height="360"
@@ -100,7 +97,7 @@
     </div>
 </section>
 </main>
-<!-- Footer: repeated identically on every page - brand blurb, quick links, and contact info -->
+<!-- I repeat the same footer on every page, with the brand text, quick links and contact info -->
 <footer>
     <div class="footer-content">
         <div class="footer-column">

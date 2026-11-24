@@ -1,11 +1,10 @@
-//Load the variables from the .env file (database host, user, password and name)
-
+// I load the variables from my .env file (database host, user, password and name)
 require("dotenv").config();
 
-// Load the mysql2 package to connect Node.js to MySQL
+// I use the mysql2 package to connect Node.js to MySQL
 const mysql = require("mysql2");
 
-//Create the connection using the details from the .env file
+// I create the connection using the details from the .env file, so the password is not written in the code
 const connection = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -13,5 +12,5 @@ const connection = mysql.createConnection({
     database: process.env.DB_NAME
 });
 
-//Export the connection so serve.js can use it
+// I export the connection so server.js can use it
 module.exports = connection;
