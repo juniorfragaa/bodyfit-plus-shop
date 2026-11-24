@@ -124,12 +124,96 @@ app.post("/login", function (req, res) {
             return res.status(401).json({ message: "Invalid email or password" });
         }
 
-        // I also send back the name and email, so the shop can show who is logged in
-        res.json({
-            message: "Login successful! Welcome " + user.name,
-            name: user.name,
-            email: user.email
+        res.json({ message: "Login successful! Welcome " + user.name });
+    });
+});
+
+// BASKET
+// I keep the basket in the basket table in MySQL, so it stays when the customer changes page.
+// Each row is one product with its quantity (for plans the quantity means months).
+
+// I used get to send all the rows of the basket as JSON
+app.get("/basket", function (req, res) {
+    let sql = "SELECT * FROM basket";
+
+    connection.query(sql, function (error, results) {
+        if (error) {
+            return res.status(500).json({ message: "Could not load the basket" });
+        }
+        res.json(results);
+    });
+});
+
+// I add one unit of a product. If the product is already in the basket I add 1 to its quantity,
+// if not I insert a new row with quantity 1
+app.post("/basket/add", function (req, res) {
+    let productId = req.body.productId;
+
+    if (typeof productId !== "number") {
+        return res.status(400).json({ message: "Invalid product" });
+    }
+
+    let sql = "SELECT * FROM basket WHERE product_id = ?";
+
+    connection.query(sql, [productId], function (error, results) {
+        if (error) {
+            return res.status(500).json({ message: "Could not update the basket" });
+        }
+
+        if (results.length > 0) {
+            sql = "UPDATE basket SET quantity = quantity + 1 WHERE product_id = ?";
+        } else {
+            sql = "INSERT INTO basket (product_id, quantity) VALUES (?, 1)";
+        }
+
+        connection.query(sql, [productId], function (error) {
+            if (error) {
+                return res.status(500).json({ message: "Could not update the basket" });
+            }
+            res.json({ message: "Added to basket" });
         });
+    });
+});
+
+// I take one unit away. If the quantity reaches 0, I delete the row
+app.post("/basket/minus", function (req, res) {
+    let productId = req.body.productId;
+
+    if (typeof productId !== "number") {
+        return res.status(400).json({ message: "Invalid product" });
+    }
+
+    let sql = "UPDATE basket SET quantity = quantity - 1 WHERE product_id = ?";
+
+    connection.query(sql, [productId], function (error) {
+        if (error) {
+            return res.status(500).json({ message: "Could not update the basket" });
+        }
+
+        connection.query("DELETE FROM basket WHERE quantity <= 0", function (error) {
+            if (error) {
+                return res.status(500).json({ message: "Could not update the basket" });
+            }
+            res.json({ message: "Removed one" });
+        });
+    });
+});
+
+// I remove a product from the basket completely
+app.post("/basket/remove", function (req, res) {
+    let productId = req.body.productId;
+
+    if (typeof productId !== "number") {
+        return res.status(400).json({ message: "Invalid product" });
+    }
+
+    let sql = "DELETE FROM basket WHERE product_id = ?";
+
+    connection.query(sql, [productId], function (error) {
+        if (error) {
+            return res.status(500).json({ message: "Could not update the basket" });
+        }
+        res.json({ message: "Removed from basket" });
     });
 });
 

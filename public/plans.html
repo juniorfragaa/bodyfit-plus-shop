@@ -23,8 +23,11 @@
                 <li><a href="about.html">About Us</a></li>
                 <!-- I used aria-current="page" to tell screen readers which page is open -->
                 <li><a href="plans.html" aria-current="page">Plans</a></li>
+                <li><a href="products.html">Shop</a></li>
                 <li><a href="equipment.html">Equipment</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                <li><a href="basket.html" id="basket-link">Basket</a></li>
+                <li><a href="login.html">Login</a></li>
             </ul>
         </nav>
     </header>
@@ -111,7 +114,8 @@
             </tr>
         </tbody>
     </table>
-    <a href="contact.html" class="cta-button">Get Started</a>
+    <!-- I send the customer to the shop so they can buy a plan -->
+    <a href="products.html" class="cta-button">Get Started</a>
 </section>
     </main>
     <!-- I repeat the same footer on every page, with the brand text, quick links and contact info -->
@@ -127,6 +131,7 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="plans.html">Plans</a></li>
+                    <li><a href="products.html">Shop</a></li>
                     <li><a href="equipment.html">Equipment</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
@@ -139,5 +144,7 @@
         </div>
         <p class="footer-bottom">&copy; 2026 BodyFit Plus. All rights reserved.</p>
     </footer>
+    <!-- I load my script so the basket count in the menu works on this page too -->
+    <script src="js/script.js"></script>
 </body>
 </html>

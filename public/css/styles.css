@@ -429,9 +429,18 @@ form button:hover {
     color: var(--primary-color);
 }
 
-/* I push the button to the bottom of the card so all buttons line up */
-.add-button {
+/* I show how many of this item are in the basket, right above the button.
+   min-height keeps the space even when the line is empty, so all buttons stay aligned */
+.in-basket {
     margin-top: auto;
+    min-height: 1.5rem;
+    font-weight: bold;
+    color: var(--dark-color);
+}
+
+/* The line above pushes the button to the bottom of the card, so all buttons line up */
+.add-button {
+    margin-top: 0;
     padding: 0.8rem;
     background-color: var(--dark-color);
     color: white;
@@ -451,4 +460,92 @@ form button:hover {
     margin-top: 1rem;
     font-weight: bold;
     color: var(--primary-color);
+}
+
+/* Basket page: one row per product */
+.basket-list {
+    max-width: 800px;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* I put the photo, the info, the subtotal and the button side by side */
+.basket-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: white;
+    border: 2px solid var(--dark-color);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: left;
+}
+
+.basket-item img {
+    width: 80px;
+    border-radius: 8px;
+}
+
+/* flex: 1 makes the info take the free space, pushing the price and button to the right */
+.basket-info {
+    flex: 1;
+}
+
+.basket-subtotal {
+    font-weight: bold;
+}
+
+.remove-button {
+    padding: 0.5rem 1rem;
+    background-color: var(--dark-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.remove-button:hover {
+    background-color: var(--primary-color);
+}
+
+.basket-total {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+/* On phones I let the basket row wrap, so the Remove button goes to a new line instead of overflowing */
+@media (max-width: 600px) {
+    .basket-item {
+        flex-wrap: wrap;
+    }
+}
+
+/* - and + buttons to change the quantity (shop cards and basket rows) */
+.in-basket,
+.qty-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.qty-button {
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid var(--dark-color);
+    border-radius: 50%;
+    background-color: white;
+    color: var(--dark-color);
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.qty-button:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
 }
