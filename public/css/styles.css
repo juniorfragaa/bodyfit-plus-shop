@@ -558,3 +558,64 @@ form button:hover {
     padding: 1rem;
     margin: 1rem 0;
 }
+
+/* RESPONSIVE: tablets and phones
+   I used media queries so the whole site works on small screens, not only the shop */
+
+/* Tablets: the menu has 8 links, so I put it under the logo and let the links wrap */
+@media (max-width: 900px) {
+    header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.6rem 1.2rem;
+    }
+
+    /* I stack the story and the values, because 10rem of gap does not fit on a small screen */
+    .about-intro {
+        flex-direction: column;
+        gap: 2rem;
+    }
+}
+
+/* Phones: I stack the columns one under another */
+@media (max-width: 600px) {
+    header {
+        padding: 1rem;
+    }
+
+    .hero-images,
+    .feature-list,
+    .highlights,
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Each hero photo can use the full width on a phone */
+    .hero-img {
+        max-width: 100%;
+    }
+
+    .highlights {
+        padding: 2rem 1rem;
+    }
+
+    /* The equipment gallery shows 1 photo per row */
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+
+    /* The plans table is wide, so I let it scroll sideways instead of breaking the page */
+    .plans {
+        overflow-x: auto;
+    }
+
+    th, td {
+        font-size: 0.85rem;
+    }
+}
