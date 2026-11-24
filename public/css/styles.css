@@ -445,3 +445,10 @@ form button:hover {
 .add-button:hover {
     background-color: var(--primary-color);
 }
+
+/* I made the server message stand out under the register and login forms */
+.form-message {
+    margin-top: 1rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}

@@ -92,3 +92,84 @@ if (productList) {
                 "Unable to load products. Please try again.";
         });
 }
+
+// REGISTER PAGE
+// I only run this if the page has the register form (register.html)
+const registerForm = document.getElementById("registerForm");
+
+if (registerForm) {
+    registerForm.addEventListener("submit", async function (event) {
+        // I stop the form from reloading the page
+        event.preventDefault();
+
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        let confirmPassword = document.getElementById("confirmPassword").value;
+        let message = document.getElementById("message");
+
+        // I check that both passwords match before sending anything to the server
+        if (password !== confirmPassword) {
+            message.textContent = "The passwords do not match.";
+            return;
+        }
+
+        try {
+            // I send the data to my /register route as JSON
+            let response = await fetch("/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name: name, email: email, password: password })
+            });
+            let data = await response.json();
+
+            // I show the message the server sent back
+            message.textContent = data.message;
+
+            // If the registration worked, I clear the form
+            if (response.ok) {
+                registerForm.reset();
+            }
+        } catch (error) {
+            message.textContent = "Unable to connect to server";
+        }
+    });
+}
+
+// LOGIN PAGE
+// I only run this if the page has the login form (login.html)
+const loginForm = document.getElementById("loginForm");
+
+if (loginForm) {
+    loginForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        let email = document.getElementById("loginEmail").value;
+        let password = document.getElementById("loginPassword").value;
+        let message = document.getElementById("message");
+
+        try {
+            // I send the email and password to my /login route
+            let response = await fetch("/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: email, password: password })
+            });
+            let data = await response.json();
+
+            message.textContent = data.message;
+
+            // If the login worked, I save the user's name and email in the browser
+            // and send them to the shop after one second
+            if (response.ok) {
+                localStorage.setItem("userName", data.name);
+                localStorage.setItem("userEmail", data.email);
+                setTimeout(function () {
+                    window.location.href = "products.html";
+                }, 1000);
+            }
+        } catch (error) {
+            message.textContent = "Unable to connect to server";
+        }
+    });
+}
