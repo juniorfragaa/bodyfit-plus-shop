@@ -376,3 +376,72 @@ form button {
 form button:hover {
     background-color: var(--dark-color);
 }
+
+/* Shop page: product cards */
+.shop {
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+/* I used CSS Grid with 3 equal columns, so the 6 products show as 2 rows of 3.
+   I limited the width and used margin auto to keep the grid in the center of the page */
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 2rem auto 0;
+}
+
+/* On tablets I show 2 cards per row */
+@media (max-width: 900px) {
+    .product-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* On phones I show 1 card per row */
+@media (max-width: 600px) {
+    .product-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* I used the same card look as the other cards on the site */
+.product-card {
+    background-color: white;
+    border: 2px solid var(--dark-color);
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.product-card img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.product-price {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* I push the button to the bottom of the card so all buttons line up */
+.add-button {
+    margin-top: auto;
+    padding: 0.8rem;
+    background-color: var(--dark-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* I made the button turn red when the mouse is over it */
+.add-button:hover {
+    background-color: var(--primary-color);
+}
